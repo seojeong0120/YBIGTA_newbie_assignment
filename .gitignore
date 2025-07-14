@@ -210,7 +210,6 @@ __marimo__/
 __pycache__/ 
 *.pyc 
 .mypy_cache/ 
-submission/ 
 .vscode/ 
 .ipynb_checkpoints/ 
 >>>>>>> fccd5a2 (Upload YBIGTA 1회차 Python 과제 (1(1)-Python 폴더))
