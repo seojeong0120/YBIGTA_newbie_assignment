@@ -78,12 +78,15 @@ class Word2Vec(nn.Module):
                 # context 임베딩 평균
                 context_embedding = self.embeddings(context_tensor) # (2 * window_size, d_model)
                 context_mean = context_embedding.mean(dim=0) # (d_model,)
+                # 예측 확률 분포 생성
                 logits = self.weight(context_mean) # (vocab_size,)
                 # 손실 계산
                 loss = criterion(logits.unsqueeze(0), target_tensor) # (1, vocab_size)
-                # 역전파
+                # 기존 기울기 초기화
                 optimizer.zero_grad()
+                # 역전파 수행하여 그래디언트 계산
                 loss.backward()
+                # 파라미터 업데이트
                 optimizer.step()
 
     def _train_skipgram(
@@ -117,13 +120,16 @@ class Word2Vec(nn.Module):
                 center_tensor = torch.tensor([center]).to(self.embeddings.weight.device) # (1,)
                 # 중심 단어 임베딩
                 center_embedding = self.embeddings(center_tensor).squeeze(0).detach() # (d_model,)
-                # 
                 for ctx in context:
+                    # 정답 레이블인 context 단어 인덱스를 텐서로 변환
                     context_tensor = torch.tensor([ctx]).to(self.embeddings.weight.device) # (1,)
+                    # 중심 단어의 임베딩을 이용해 예측 확률 분포 생성
                     logits = self.weight(center_embedding) # (vocab_size,)
                     # 손실 계산
                     loss = criterion(logits.unsqueeze(0), context_tensor)
-                    # 역전파
+                    # 기존 기울기 초기화
                     optimizer.zero_grad()
+                    # 역전파 수행하여 그래디언트 계산
                     loss.backward()
+                    # 파라미터 업데이트
                     optimizer.step()
