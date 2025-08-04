@@ -6,7 +6,7 @@
 |----------------------|--------|--------|--------|
 | Direct Prompting     | 0.20   | 0.22   | 0.16   |
 | Chain-of-Thought     | 0.80   | 0.70   | 0.66   |
-| My Prompting         | 0.88   | 0.66   | 0.76   |
+| My Prompting         | 0.88   | 0.74   | 0.76   |
 
 - **데이터 출처**  
   - `direct_prompting_0.txt`, `direct_prompting_3.txt`, `direct_prompting_5.txt`  
